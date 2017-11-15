@@ -1,0 +1,7 @@
+---
+atom_default_version: '1.13.0'
+atom_current_version:
+atom_base_url: 'https://github.com/atom/atom/releases/download'
+atom_release_api_url: 'https://api.github.com/repos/atom/atom/releases/latest'
+atom_deb: 'atom-{{atom_deb_platform}}.deb'
+atom_rpm: 'atom.{{atom_rpm_platform}}.rpm'

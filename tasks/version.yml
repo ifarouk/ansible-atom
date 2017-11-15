@@ -1,0 +1,27 @@
+---
+- name: get installed atom version
+  shell: "atom --version | grep Atom | sed -e 's/Atom\\s\\+:\\s\\+//'"
+  register: atom_version_result
+  ignore_errors: yes
+
+- name: set atom current version fact
+  set_fact:
+    atom_current_version: "{{ atom_version_result.stdout|default('') }}"
+  register: atom_fact_result
+
+- name: get latest stable atom tag
+  uri:
+    url: "{{ atom_release_api_url }}"
+  ignore_errors: yes
+  register: atom_github_result
+  when: atom_version == 'latest'
+
+- name: set atom latest version fact
+  set_fact:
+    atom_version: "{{ atom_github_result.json.tag_name|default(atom_default_version)|replace('v','') }}"
+  when: atom_version == 'latest'
+
+- name: set atom version fact
+  set_fact:
+    atom_version: "{{ atom_default_version }}"
+  when: atom_version == '' or atom_version is none

@@ -1,0 +1,18 @@
+---
+- include: version.yml
+  tags:
+    - atom
+
+- include: install_debian.yml
+  when: ansible_os_family == 'Debian'
+  tags:
+    - atom
+
+- include: install_redhat.yml
+  when: ansible_os_family == 'RedHat'
+  tags:
+    - atom
+
+- include: config.yml
+  tags:
+    - atom

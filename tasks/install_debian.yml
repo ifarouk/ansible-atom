@@ -1,0 +1,14 @@
+---
+- name: download atom on debian
+  get_url:
+    url: "{{atom_base_url}}/v{{atom_version}}/{{atom_deb}}"
+    dest: "/tmp/{{atom_deb}}"
+    owner: root
+    group: root
+    mode: 0644
+  when: atom_current_version != atom_version
+
+- name: install atom on debian
+  apt:
+    deb: "/tmp/{{atom_deb}}"
+  when: atom_current_version != atom_version

@@ -1,0 +1,17 @@
+---
+- name: create user's Atom directory
+  file:
+    path: "/home/{{ item.user }}/.atom"
+    state: directory
+    mode: '0755'
+    owner: "{{ item.user }}"
+    group: "{{ item.group|default(item.user) }}"
+  with_items: "{{ atom_users }}"
+
+- name: install Atom packages with apm
+  command: "apm install {{ item.1 }}"
+  become_user: "{{ item.0.user}}"
+  with_subelements:
+    - "{{ atom_users }}"
+    - packages
+    - { skip_missing: true }

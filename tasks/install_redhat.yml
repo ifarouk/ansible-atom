@@ -1,0 +1,12 @@
+---
+- name: download atom on redhat
+  get_url:
+    url: "{{atom_base_url}}/v{{atom_version}}/{{atom_rpm}}"
+    dest: "/tmp/{{atom_rpm}}"
+  when: atom_current_version != atom_version
+
+- name: install atom on redhat
+  yum:
+    name: "/tmp/{{atom_rpm}}"
+    state: present
+  when: atom_current_version != atom_version

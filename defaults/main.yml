@@ -1,0 +1,10 @@
+---
+atom_version: latest
+atom_deb_platform: 'amd64'
+atom_rpm_platform: 'x86_64'
+
+atom_users: []
+  # -
+  #   user: <username>
+  #   group: <group>
+  #   packages: []
